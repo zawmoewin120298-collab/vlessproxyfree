@@ -1,64 +1,69 @@
-<body>
-    <head>
+<!DOCTYPE html>
+<html lang="my">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store Vless</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
-    
+</head>
+<body>
+
     <nav class="navbar">
         <div class="nav-container">
             <span class="brand-name">Store Vless</span>
         </div>
     </nav>
 
-    <div class="vpn-container">
-        <div class="vpn-card">
-            <div class="card-header">
-                <img src="https://flagcdn.com/w80/sg.png" class="flag">
-                <h2 class="vpn-name">V2Ray Vless Singapore #8023</h2>
-            </div>
-            <div class="copy-section">
-                <input type="hidden" value="vless://your-link-1" class="vpn-link">
-                <button onclick="copyDirect(this)" class="btn-copy">Copy Link</button>
-            </div>
-            <hr class="divider">
-            <div class="card-footer">
-                <span><i class="far fa-clock"></i> 43s ago</span>
-                <span class="ping"><i class="fas fa-satellite-dish"></i> 8ms</span>
-            </div>
+    <div class="vpn-container" id="vpn-list">
         </div>
-
-        <div class="vpn-card">
-            <div class="card-header">
-                <img src="https://flagcdn.com/w80/ca.png" class="flag">
-                <h2 class="vpn-name">V2Ray Vless Canada #5978106</h2>
-            </div>
-            <div class="copy-section">
-                <input type="hidden" value="vless://your-link-2" class="vpn-link">
-                <button onclick="copyDirect(this)" class="btn-copy">Copy Link</button>
-            </div>
-            <hr class="divider">
-            <div class="card-footer">
-                <span><i class="far fa-clock"></i> 1m ago</span>
-                <span class="ping"><i class="fas fa-satellite-dish"></i> 20ms</span>
-            </div>
-        </div>
-    </div>
 
     <script>
-    function copyDirect(btn) {
-        var linkValue = btn.previousElementSibling.value;
-        navigator.clipboard.writeText(linkValue).then(function() {
-            var originalText = btn.innerHTML;
-            btn.innerHTML = "Copied!";
-            btn.style.backgroundColor = "#2ea44f";
-            setTimeout(function() {
-                btn.innerHTML = originalText;
-                btn.style.backgroundColor = "#1a73e8";
-            }, 2000);
+        // ကတ်ပြား ၁၀ ခုအတွက် အချက်အလက်များ
+        const vpnData = [
+            { name: "V2Ray Vless Singapore #8023", flag: "sg", link: "vless://link-1", ping: "8ms", time: "43s ago" },
+            { name: "V2Ray Vless Canada #5978106", flag: "ca", link: "vless://link-2", ping: "20ms", time: "1m ago" },
+            { name: "Outline VPN Germany #1245", flag: "de", link: "ss://link-3", ping: "156ms", time: "1m ago" },
+            { name: "Outline VPN Thailand #1775", flag: "th", link: "ss://link-4", ping: "85ms", time: "1m ago" },
+            { name: "V2Ray Vless Singapore #2062", flag: "sg", link: "vless://link-5", ping: "16ms", time: "2m ago" },
+            // ကျန်တဲ့ ၅ ခုကိုလည်း ဒီလိုပဲ ထပ်တိုးနိုင်ပါတယ်
+        ];
+
+        const container = document.getElementById('vpn-list');
+
+        vpnData.forEach(vpn => {
+            const card = `
+                <div class="vpn-card">
+                    <div class="card-header">
+                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
+                        <h2 class="vpn-name">${vpn.name}</h2>
+                    </div>
+                    <div class="copy-section">
+                        <input type="hidden" value="${vpn.link}">
+                        <button onclick="copyLink(this)" class="btn-copy">Copy Link</button>
+                    </div>
+                    <hr class="divider">
+                    <div class="card-footer">
+                        <span><i class="far fa-clock"></i> ${vpn.time}</span>
+                        <span class="ping"><i class="fas fa-satellite-dish"></i> ${vpn.ping}</span>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += card;
         });
-    }
+
+        function copyLink(btn) {
+            const link = btn.previousElementSibling.value;
+            navigator.clipboard.writeText(link).then(() => {
+                const oldText = btn.innerText;
+                btn.innerText = "Copied!";
+                btn.style.backgroundColor = "#2ea44f";
+                setTimeout(() => {
+                    btn.innerText = oldText;
+                    btn.style.backgroundColor = "#1a73e8";
+                }, 2000);
+            });
+        }
     </script>
 </body>
+</html>
