@@ -1,89 +1,25 @@
-body {
-    background-color: #f4f7f9;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-}
-
-/* Navbar */
 .navbar {
-    background-color: #87ceeb;
+    background-color: #ffffff;
     padding: 15px;
-    position: fixed;
+    position: fixed; /* အပေါ်မှာ ကပ်နေစေရန် */
     top: 0;
     width: 100%;
     z-index: 1000;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .brand-name {
     font-size: 22px;
     font-weight: bold;
-    color: #333;
+    color: #1a73e8;
 }
 
-/* VPN Container */
+/* ကတ်ပြားများ အစီအရီ ဖြစ်စေရန် */
 .vpn-container {
-    margin-top: 80px;
+    margin-top: 80px; /* Navbar နဲ့ မငြိအောင် အောက်ချထားခြင်း */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-}
-
-/* VPN Card Style */
-.vpn-card {
-    background: white;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.card-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.flag {
-    width: 40px;
-    border-radius: 4px;
-}
-
-.vpn-name {
-    font-size: 18px;
-    color: #1a73e8;
-    margin: 0;
-}
-
-.btn-copy {
-    width: 100%;
-    padding: 10px;
-    margin: 15px 0;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.divider {
-    border: 0;
-    border-top: 1px solid #eee;
-}
-
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #666;
-}
-
-.ping {
-    color: #2ea44f;
-    font-weight: bold;
+    gap: 20px; /* ကတ်တစ်ခုနဲ့တစ်ခု ကြားအကွာအဝေး */
 }
