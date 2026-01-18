@@ -19,14 +19,18 @@
         </div>
 
     <script>
-        // ကတ်ပြား ၁၀ ခုအတွက် အချက်အလက်များ
+        // ဒီနေရာမှာ မိမိရဲ့ Link အစစ်တွေကို ပြောင်းထည့်ရုံပါပဲ
         const vpnData = [
-            { name: "V2Ray Vless Singapore #8023", flag: "sg", link: "vless://link-1", ping: "8ms", time: "43s ago" },
-            { name: "V2Ray Vless Canada #5978106", flag: "ca", link: "vless://link-2", ping: "20ms", time: "1m ago" },
-            { name: "Outline VPN Germany #1245", flag: "de", link: "ss://link-3", ping: "156ms", time: "1m ago" },
-            { name: "Outline VPN Thailand #1775", flag: "th", link: "ss://link-4", ping: "85ms", time: "1m ago" },
-            { name: "V2Ray Vless Singapore #2062", flag: "sg", link: "vless://link-5", ping: "16ms", time: "2m ago" },
-            // ကျန်တဲ့ ၅ ခုကိုလည်း ဒီလိုပဲ ထပ်တိုးနိုင်ပါတယ်
+            { name: "V2Ray Vless Singapore #8023", flag: "sg", link: "vless://link1", ping: "8ms", time: "43s ago" },
+            { name: "V2Ray Vless Canada #5978106", flag: "ca", link: "vless://link2", ping: "20ms", time: "1m ago" },
+            { name: "Outline VPN Germany #1245", flag: "de", link: "ss://link3", ping: "156ms", time: "1m ago" },
+            { name: "Outline VPN Thailand #1775", flag: "th", link: "ss://link4", ping: "85ms", time: "1m ago" },
+            { name: "V2Ray Vless Singapore #2062", flag: "sg", link: "vless://link5", ping: "16ms", time: "2m ago" },
+            { name: "V2Ray Vless USA #9921", flag: "us", link: "vless://link6", ping: "210ms", time: "3m ago" },
+            { name: "V2Ray Vless Japan #4432", flag: "jp", link: "vless://link7", ping: "45ms", time: "4m ago" },
+            { name: "Outline VPN UK #3321", flag: "gb", link: "ss://link8", ping: "180ms", time: "5m ago" },
+            { name: "V2Ray Vless Hong Kong #7712", flag: "hk", link: "vless://link9", ping: "25ms", time: "6m ago" },
+            { name: "V2Ray Vless France #1102", flag: "fr", link: "vless://link10", ping: "140ms", time: "7m ago" }
         ];
 
         const container = document.getElementById('vpn-list');
