@@ -3,52 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vlessproxy</title>
+    <title>Store Vless</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-container">
-            <span class="brand-name">Vless proxy</span>
-            <marquee>ဖိုင်းတွေးကိုအခမဲ့တင်ပေးတဲ့ဆိုက်ပါvipလည်းလာဝယ်ယူနိုင်ပါတယ်</marquee>
+            <span class="brand-name">Store Vless</span>
         </div>
     </nav>
 
-    <div class="vpn-container" id="vpn-list"></div>
-
-    <div style="text-align: center; margin-top: 30px; padding: 20px; border-top: 1px solid #ddd; background-color: #f8f9fa; clear: both;">
-        <p style="color: #666; font-size: 14px; margin-bottom: 10px; font-family: sans-serif;">📊 Total Website Visits</p>
-        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fvlessproxy.opentwitter.de5.net&count_bg=%231a73e8&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Views&edge_flat=false" alt="Visitor Count">
-    </div>
+    <div class="vpn-container" id="vpn-list">
+        </div>
 
     <script>
+        // ဒီနေရာမှာ မိမိရဲ့ Link အစစ်တွေကို ပြောင်းထည့်ရုံပါပဲ
         const vpnData = [
-            { name: "V2Ray Vless Singapore", flag: "sg", link: "vmess://eyJhZGQiOiIyMDkuMTI2Ljg0LjE4OSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0Ijoid3d3LnNwZWVkdGVzdC5uZXQub3BlbnR3aXR0ZXIuZGU1Lm5ldCIsImlkIjoiMmM5ODExNjQtOWI5My00YmNhLTk0ZmYtYjc4ZDNmODQ5OGQ3IiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiL3ZtZXNzd3MiLCJwb3J0IjoiNDQzIiwicHMiOiJVUyIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "8ms", time: "43s ago" },
-            { name: "V2Ray Vless Canada", flag: "ca", link: "vmess://eyJhZGQiOiJuMTc2MTIxNDkxNS5tdjd3aC50ZWNoIiwiaWQiOiIxZjJkYWY0My1mZjkwLTRkZjktOTI3Ni1kZmI4NDg2ZDcyYmMiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInRscyI6InRscyIsInYiOiIyIn0=", ping: "20ms", time: "1m ago" },
-            { name: "Outline VPN Germany", flag: "de", link: "vless://1a25f8ad-cad2-4e93-b5bf-34e42bcac02a@8.47.69.0:2053?path=%2F&security=tls&encryption=none&type=ws&host=sni.111000.dynv6.net&sni=sni.111000.dynv6.net#Germany", ping: "156ms", time: "1m ago" }
+            { name: "V2Ray Vless Singapore #8023", flag: "sg", link: "vless://link1", ping: "8ms", time: "43s ago" },
+            { name: "V2Ray Vless Canada #5978106", flag: "ca", link: "vless://link2", ping: "20ms", time: "1m ago" },
+            { name: "Outline VPN Germany #1245", flag: "de", link: "ss://link3", ping: "156ms", time: "1m ago" },
+            { name: "Outline VPN Thailand #1775", flag: "th", link: "ss://link4", ping: "85ms", time: "1m ago" },
+            { name: "V2Ray Vless Singapore #2062", flag: "sg", link: "vless://link5", ping: "16ms", time: "2m ago" },
+            { name: "V2Ray Vless USA #9921", flag: "us", link: "vless://link6", ping: "210ms", time: "3m ago" },
+            { name: "V2Ray Vless Japan #4432", flag: "jp", link: "vless://link7", ping: "45ms", time: "4m ago" },
+            { name: "Outline VPN UK #3321", flag: "gb", link: "ss://link8", ping: "180ms", time: "5m ago" },
+            { name: "V2Ray Vless Hong Kong #7712", flag: "hk", link: "vless://link9", ping: "25ms", time: "6m ago" },
+            { name: "V2Ray Vless France #1102", flag: "fr", link: "vless://link10", ping: "140ms", time: "7m ago" }
         ];
 
         const container = document.getElementById('vpn-list');
 
         vpnData.forEach(vpn => {
             const card = `
-                <div class="vpn-card" style="background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <div class="card-header" style="display: flex; align-items: center; margin-bottom: 10px;">
-                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" style="width: 30px; height: auto; margin-right: 10px;">
-                        <h2 style="font-size: 18px; color: #1a73e8;">${vpn.name}</h2>
+                <div class="vpn-card">
+                    <div class="card-header">
+                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
+                        <h2 class="vpn-name">${vpn.name}</h2>
                     </div>
-                    <button onclick="copyLink('${vpn.link}', this)" style="width: 100%; padding: 10px; background: #1a73e8; color: white; border: none; border-radius: 6px; cursor: pointer;">Copy Link</button>
-                    <div class="card-footer" style="margin-top: 10px; font-size: 12px; color: #666; display: flex; justify-content: space-between;">
-                        <span>🕒 ${vpn.time}</span>
-                        <span style="color: #2ea44f;">📡 ${vpn.ping}</span>
+                    <div class="copy-section">
+                        <input type="hidden" value="${vpn.link}">
+                        <button onclick="copyLink(this)" class="btn-copy">Copy Link</button>
+                    </div>
+                    <hr class="divider">
+                    <div class="card-footer">
+                        <span><i class="far fa-clock"></i> ${vpn.time}</span>
+                        <span class="ping"><i class="fas fa-satellite-dish"></i> ${vpn.ping}</span>
                     </div>
                 </div>
             `;
             container.innerHTML += card;
         });
 
-        function copyLink(link, btn) {
+        function copyLink(btn) {
+            const link = btn.previousElementSibling.value;
             navigator.clipboard.writeText(link).then(() => {
                 const oldText = btn.innerText;
                 btn.innerText = "Copied!";
