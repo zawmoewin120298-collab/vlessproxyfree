@@ -15,8 +15,7 @@
         </div>
     </nav>
 
-    <div class="vpn-container" id="vpn-list">
-        </div>
+    <div class="vpn-container" id="vpn-list"></div>
 
     <div style="text-align: center; margin-top: 30px; padding: 20px; border-top: 1px solid #ddd; background-color: #f8f9fa; clear: both;">
         <p style="color: #666; font-size: 14px; margin-bottom: 10px; font-family: sans-serif;">📊 Total Website Visits</p>
@@ -25,43 +24,31 @@
 
     <script>
         const vpnData = [
-            { name: "V2Ray Vless Singapore ", flag: "sg", link: "vmess://eyJhZGQiOiIyMDkuMTI2Ljg0LjE4OSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0Ijoid3d3LnNwZWVkdGVzdC5uZXQub3BlbnR3aXR0ZXIuZGU1Lm5ldCIsImlkIjoiMmM5ODExNjQtOWI5My00YmNhLTk0ZmYtYjc4ZDNmODQ5OGQ3IiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiL3ZtZXNzd3MiLCJwb3J0IjoiNDQzIiwicHMiOiJVUyDwn5iC8J+YgvCfmILwn5iC8J+YgiIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "8ms", time: "43s ago" },
-            { name: "V2Ray Vless Canada ", flag: "ca", link: "vmess://eyJhZGQiOiJuMTc2MTIxNDkxNS5tdjd3aC50ZWNoIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiJuMTc2MTIxNDkxNS5tdjd3aC50ZWNoIiwiaWQiOiIxZjJkYWY0My1mZjkwLTRkZjktOTI3Ni1kZmI4NDg2ZDcyYmMiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInBzIjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsInNjeSI6ImF1dG8iLCJzbmkiOiJuMTc2MTIxNDkxNS5tdjd3aC50ZWNoIiwidGxzIjoidGxzIiwidHlwZSI6Ii0tLSIsInYiOiIyIn0=", ping: "20ms", time: "1m ago" },
-            { name: "Outline VPN Germany ", flag: "de", link: "vless://1a25f8ad-cad2-4e93-b5bf-34e42bcac02a@8.47.69.0:2053?path=%2F&security=tls&encryption=none&insecure=1&host=sni.111000.dynv6.net&fp=chrome&type=ws&allowInsecure=1&sni=sni.111000.dynv6.net#sni.111000.dynv6.net", ping: "156ms", time: "1m ago" },
-            { name: "Outline VPN Thailand ", flag: "th", link: "vmess://eyJhZGQiOiJmcmFua2Z1cnQwMS56Z2pvay5jb20iLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6ImZyYW5rZnVydDAxLnpnam9rLmNvbSIsImlkIjoiYjcxNTc5YjEtNjU5My00MjZkLTkwYWMtZjAwMmZhOTZhZGUxIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwcyI6ImZyYW5rZnVydDAxLnpnam9rLmNvbSIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiJ0bHMiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "85ms", time: "1m ago" },
-            { name: "V2Ray Vless Singapore ", flag: "sg", link: "vless://link5", ping: "16ms", time: "2m ago" },
-            { name: "V2Ray Vless USA ", flag: "us", link: "vmess://eyJhZGQiOiIxNS4yMzUuNDEuMjAwIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiIiLCJpZCI6IjU4ZmUxNTQyLTUyOTAtNDBhZC04MTVhLTc3NzA3YTgxYWZlNSIsImluc2VjdXJlIjoiMCIsIm5ldCI6IndzIiwicGF0aCI6Ii9JT2ViaExNaGwxQ1RiRkhiTDk1bXlmUlgyIiwicG9ydCI6IjgwIiwicHMiOiJhbGxvd2VkIHNpbWNhcmQiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Ii0tLSIsInYiOiIyIn0=", ping: "210ms", time: "3m ago" },
-            { name: "V2Ray Vless Japan ", flag: "jp", link: "vless://d0298536-d670-4045-bbb1-ddd5ea68683e@172.66.132.196:443?path=%2Ftelegram-%40v2ray_alpha&security=tls&encryption=none&insecure=0&host=a.azadnet003.ddns-ip.net&fp=chrome&type=ws&allowInsecure=0&sni=a.azadnet003.ddns-ip.net#a.azadnet003.ddns-ip.net", ping: "45ms", time: "4m ago" },
-            { name: "Outline VPN UK ", flag: "gb", link: "vless://e4824193-4f54-453b-d037-88368e85ef0e@all.tellmethetrue.shop:443?mode=gun&security=tls&alpn=h2&encryption=none&insecure=0&type=grpc&allowInsecure=0&sni=pqh30v5.carwashipdir.shop#all.tellmethetrue.shop", ping: "180ms", time: "5m ago" },
-            { name: "V2Ray Vless Hong Kong ", flag: "hk", link: "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@119.59.98.58:990#th", ping: "25ms", time: "6m ago" },
-            { name: "V2Ray Vless France ", flag: "fr", link: "vmess://eyJhZGQiOiJuMTc1MzU5ODQ0OC43NHF4di50b3AiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6Im4xNzUzNTk4NDQ4Ljc0cXh2LnRvcCIsImlkIjoiM2NkNmY4NDktMDc4ZS00ZGE5LTgwODAtYTI3OTFiNTFiNzY2IiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwcyI6IvCfh6/wn4e1anAiLCJzY3kiOiJhdXRvIiwic25pIjoibjE3NTM1OTg0NDguNzRxeHYudG9wIiwidGxzIjoidGxzIiwidHlwZSI6Ii0tLSIsInYiOiIyIn0=", ping: "140ms", time: "7m ago" }
+            { name: "V2Ray Vless Singapore", flag: "sg", link: "vmess://eyJhZGQiOiIyMDkuMTI2Ljg0LjE4OSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0Ijoid3d3LnNwZWVkdGVzdC5uZXQub3BlbnR3aXR0ZXIuZGU1Lm5ldCIsImlkIjoiMmM5ODExNjQtOWI5My00YmNhLTk0ZmYtYjc4ZDNmODQ5OGQ3IiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiL3ZtZXNzd3MiLCJwb3J0IjoiNDQzIiwicHMiOiJVUyIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "8ms", time: "43s ago" },
+            { name: "V2Ray Vless Canada", flag: "ca", link: "vmess://eyJhZGQiOiJuMTc2MTIxNDkxNS5tdjd3aC50ZWNoIiwiaWQiOiIxZjJkYWY0My1mZjkwLTRkZjktOTI3Ni1kZmI4NDg2ZDcyYmMiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInRscyI6InRscyIsInYiOiIyIn0=", ping: "20ms", time: "1m ago" },
+            { name: "Outline VPN Germany", flag: "de", link: "vless://1a25f8ad-cad2-4e93-b5bf-34e42bcac02a@8.47.69.0:2053?path=%2F&security=tls&encryption=none&type=ws&host=sni.111000.dynv6.net&sni=sni.111000.dynv6.net#Germany", ping: "156ms", time: "1m ago" }
         ];
 
         const container = document.getElementById('vpn-list');
 
         vpnData.forEach(vpn => {
             const card = `
-                <div class="vpn-card">
-                    <div class="card-header">
-                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
-                        <h2 class="vpn-name">${vpn.name}</h2>
+                <div class="vpn-card" style="background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <div class="card-header" style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" style="width: 30px; height: auto; margin-right: 10px;">
+                        <h2 style="font-size: 18px; color: #1a73e8;">${vpn.name}</h2>
                     </div>
-                    <div class="copy-section">
-                        <input type="hidden" value="${vpn.link}">
-                        <button onclick="copyLink(this)" class="btn-copy">Copy Link</button>
-                    </div>
-                    <hr class="divider">
-                    <div class="card-footer">
-                        <span><i class="far fa-clock"></i> ${vpn.time}</span>
-                        <span class="ping"><i class="fas fa-satellite-dish"></i> ${vpn.ping}</span>
+                    <button onclick="copyLink('${vpn.link}', this)" style="width: 100%; padding: 10px; background: #1a73e8; color: white; border: none; border-radius: 6px; cursor: pointer;">Copy Link</button>
+                    <div class="card-footer" style="margin-top: 10px; font-size: 12px; color: #666; display: flex; justify-content: space-between;">
+                        <span>🕒 ${vpn.time}</span>
+                        <span style="color: #2ea44f;">📡 ${vpn.ping}</span>
                     </div>
                 </div>
             `;
             container.innerHTML += card;
         });
 
-        function copyLink(btn) {
-            const link = btn.previousElementSibling.value;
+        function copyLink(link, btn) {
             navigator.clipboard.writeText(link).then(() => {
                 const oldText = btn.innerText;
                 btn.innerText = "Copied!";
