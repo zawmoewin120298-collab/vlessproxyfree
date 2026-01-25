@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Payment Section Design */
         .payment-box {
             background: #ffffff;
             border: 2px solid #1a73e8;
@@ -18,39 +17,10 @@
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .qr-img { 
-            width: 250px; 
-            border-radius: 10px; 
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-        }
-        .upload-btn {
-            background: #f1f3f4;
-            border: 1px solid #ccc;
-            padding: 12px;
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            cursor: pointer;
-        }
-        #verifyBtn {
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        #verifyBtn:hover { background: #1557b0; }
-        #verifyBtn:disabled { background: #ccc; cursor: not-allowed; }
-        
-        /* အစပိုင်းတွင် VPN List ကို ဖုံးထားမည် */
+        .qr-img { width: 250px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #ddd; }
+        .upload-btn { background: #f1f3f4; border: 1px solid #ccc; padding: 12px; width: 100%; border-radius: 8px; margin-bottom: 15px; cursor: pointer; }
+        #verifyBtn { background: #1a73e8; color: white; border: none; padding: 15px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; }
         #vpn-list { display: none; margin-top: 20px; }
-        
         .status-loading { color: #1a73e8; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
@@ -64,10 +34,10 @@
     </nav>
 
     <div class="payment-box" id="payment-gate">
-        <h3 style="color: #1a73e8; margin-bottom: 10px;">Premium Vless Link များရယူရန်</h3>
-        <p style="margin-bottom: 15px; font-size: 14px;">အောက်ပါ PromptPay QR ကို Scan ဖတ်ပြီး ငွေလွှဲပါ၊ ပြီးနောက် Slip (ဖြတ်ပိုင်း) ကို တင်ပေးပါ။</p>
+        <h3 style="color: #1a73e8;">Premium Vless Link များရယူရန်</h3>
+        <p style="font-size: 14px;">အောက်ပါ PromptPay ကို ငွေလွှဲပြီး Slip တင်ပေးပါ</p>
         
-        <img src="https://via.placeholder.com/250x250?text=Your+PromptPay+QR" class="qr-img" alt="PromptPay QR">
+        <img src="0813309770.png" class="qr-img" alt="PromptPay QR">
         
         <input type="file" id="slipInput" class="upload-btn" accept="image/*">
         <button onclick="verifySlip()" id="verifyBtn">
@@ -80,7 +50,6 @@
         </div>
 
     <script>
-        // သင့်ရဲ့ EasySlip Authorization Key
         const API_KEY = "2f922926-e3cf-4308-b3de-e219539bbb50";
 
         async function verifySlip() {
@@ -89,14 +58,13 @@
             const btn = document.getElementById('verifyBtn');
 
             if (fileInput.files.length === 0) {
-                alert("ကျေးဇူးပြု၍ ငွေလွှဲဖြတ်ပိုင်း (Slip) ပုံ အရင်ရွေးချယ်ပေးပါ");
+                alert("ကျေးဇူးပြု၍ Slip ပုံ အရင်ရွေးပါ");
                 return;
             }
 
-            // UI ပြောင်းလဲခြင်း
             btn.disabled = true;
             status.style.display = 'block';
-            status.innerText = "ဘဏ်စနစ်ဖြင့် စစ်ဆေးနေပါသည်၊ ခေတ္တစောင့်ပါ...";
+            status.innerText = "ဘဏ်စနစ်ဖြင့် စစ်ဆေးနေပါသည်...";
 
             const formData = new FormData();
             formData.append('image', fileInput.files[0]);
@@ -111,16 +79,15 @@
                 const result = await response.json();
 
                 if (result.status === 200) {
-                    alert("ငွေပေးချေမှု အောင်မြင်ပါသည်။ Link များ ကူးယူနိုင်ပါပြီ။");
+                    alert("အောင်မြင်ပါသည်။ Link များ ကူးယူနိုင်ပါပြီ။");
                     document.getElementById('payment-gate').style.display = 'none';
                     document.getElementById('vpn-list').style.display = 'block';
-                    loadVPNs(); // VPN list ကို အောင်မြင်မှ ဆွဲထုတ်မည်
+                    loadVPNs();
                 } else {
-                    alert("ငွေလွှဲဖြတ်ပိုင်း မမှန်ကန်ပါ သို့မဟုတ် ငွေမဝင်သေးပါ။ တစ်ခါပြန်စစ်ဆေးပေးပါ။");
+                    alert("Slip မမှန်ကန်ပါ သို့မဟုတ် ငွေမဝင်သေးပါ။");
                 }
             } catch (error) {
-                alert("စနစ်အတွင်း အမှားအယွင်းရှိနေပါသည်။ အင်တာနက်လိုင်းကို စစ်ဆေးပါ။");
-                console.error(error);
+                alert("စနစ်ချို့ယွင်းချက်ရှိနေပါသည်။");
             } finally {
                 btn.disabled = false;
                 status.style.display = 'none';
@@ -130,53 +97,5 @@
         const vpnData = [
             { name: "V2Ray Vless Singapore ", flag: "sg", link: "vmess://eyJhZGQiOiIxMDQuMjIuMTg0LjE0NyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsImlkIjoiMWYyZGFmNDMtZmY5MC00ZGY5LTkyNzYtZGZiODQ4NmQ3MmJjIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwcyI6Im4xNzYxMjE0OTE1Lm12N3doLnRlY2giLCJzY3kiOiJhdXRvIiwic25pIjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsInRscyI6InRscyIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9", ping: "8ms", time: "43s ago" },
             { name: "AIS Netmod vpn ", flag: "ca", link: "nm-vless://iEWzMOShztN91nkgswdr2zNm35KVGsnJRnYd7OZMmdJqfJZGTVfaM3106Xwi7I5zx5pIQH8yR8JRP0bAaQTPGebFlOoVZfNdJzsgBY4Po5+UITzPj/qHGj9+hklBD8aeOclwCe23IhxAhJCePEBMuNgvG3lnKObYrHtnI0mDH5Gemz1bEKY1E4RJDRzV6Vi4JbBtdDBrQm7hGluHDesPjNzHwdMD/oQct8V9CNt6ouFLd9A1K/OpjRs9M8TdP/hHYOp/k1spygQATE/f03QMbkfGgXqU+muQYq0F+/0Dl3iN29Dax0g4ksPlQ34sXpRsHei0nz/vi6kzB06Uh60dWk0sNeWWTbtEs0MBH3Fuxe0Pc3FQ0S5ytCoIZCSmFlVG3J1StaQPog0Vl6anfKvG27wq181eN7l+y1Xg5qzBPOPMA8AISKCvO3Y3WEJsGgi5XjH+5zupOMhRfsE9EE9ZRA==", ping: "20ms", time: "1m ago" },
-            { name: "AIS Netmod vpn ", flag: "de", link: "vmess://eyJhZGQiOiIxMDQuMjIuMTgzLjEzMiIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiZnJhbmtmdXJ0MDEuemdqb2suY29tIiwiaWQiOiJiNzE1NzliMS02NTkzLTQyNmQtOTBhYy1mMDAyZmE5NmFkZTEiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInBzIjoiZnJhbmtmdXJ0MDEuemdqb2suY29tIiwic2N5IjoiYXV0byIsInNuaSI6ImZyYW5rZnVydDAxLnpnam9rLmNvbSIsInRscyI6InRscyIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9", ping: "156ms", time: "1m ago" },
-            { name: "v2ray VPN Thailand ", flag: "th", link: "vmess://eyJhZGQiOiIxNS4yMzUuNDEuMjAwIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiJ3d3cuc3BlZWR0ZXN0Lm5ldCIsImlkIjoiNThmZTE1NDItNTI5MC00MGFkLTgxNWEtNzc3MDdhODFhZmU1IiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiL0lPZWJoTE1obDFDVGJGSGJMOTVteWZSWDIiLCJwb3J0IjoiODAiLCJwcyI6ImFsbG93ZWQgc2ltY2FyZCIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "85ms", time: "1m ago" },
-            { name: "V2Ray Vless Singapore ", flag: "us", link: "vless://d0298536-d670-4045-bbb1-ddd5ea68683e@104.22.209.207:443?path=%2Ftelegram-%40v2ray_alpha&security=tls&encryption=none&insecure=0&host=a.azadnet003.ddns-ip.net&fp=chrome&type=ws&allowInsecure=0&sni=a.azadnet003.ddns-ip.net#a.azadnet003.ddns-ip.net", ping: "16ms", time: "2m ago" },
-            { name: "true AIS  pubg USA ", flag: "sg", link: "vless://e79f1f25-51ee-4916-b705-8f82c30cf8fc@mm.bigccoth.indevs.in:443?path=%2FMM&security=tls&encryption=none&insecure=0&host=mm.bigccoth.indevs.in&type=ws&allowInsecure=0&sni=mm.bigccoth.indevs.in#mm.bigccoth.indevs.in", ping: "210ms", time: "3m ago" },
-            { name: "V2Ray Vless Japan ", flag: "jp", link: "vless://e4824193-4f54-453b-d037-88368e85ef0e@all.tellmethetrue.shop:443?mode=gun&security=tls&alpn=h2&encryption=none&insecure=0&type=grpc&allowInsecure=0&sni=pqh30v5.carwashipdir.shop#all.tellmethetrue.shop", ping: "45ms", time: "4m ago" },
-            { name: "Outline VPN UK ", flag: "gb", link: "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@119.59.98.58:990#th", ping: "180ms", time: "5m ago" },
-            { name: "V2Ray Vless Hong Kong ", flag: "hk", link: "vmess://eyJhZGQiOiIxMDQuMjIuMjA3LjEzMyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoibjE3NTM1OTg0NDguNzRxeHYudG9wIiwiaWQiOiIzY2Q2Zjg0OS0wNzhlLTRkYTktODA4MC1hMjc5MWI1MWI3NjYiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInBzIjoi8J+Hr/Cfh7VqcCIsInNjeSI6ImF1dG8iLCJzbmkiOiJuMTc1MzU5ODQ0OC43NHF4di50b3AiLCJ0bHMiOiJ0bHMiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "25ms", time: "6m ago" },
-            { name: "V2Ray Vless France ", flag: "fr", link: "vless://86c50e3a-5b87-49dd-bd20-03c7f2735e40@railway.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&insecure=1&host=speedtest.3bb.co.th.speedtestnet.ggff.net&fp=chrome&type=ws&allowInsecure=1&sni=speedtest.3bb.co.th.speedtestnet.ggff.net#AIS", ping: "140ms", time: "7m ago" }
-        ];
-
-        function loadVPNs() {
-            const container = document.getElementById('vpn-list');
-            container.innerHTML = ""; 
-            vpnData.forEach(vpn => {
-                const card = `
-                    <div class="vpn-card">
-                        <div class="card-header">
-                            <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
-                            <h2 class="vpn-name">${vpn.name}</h2>
-                        </div>
-                        <div class="copy-section">
-                            <input type="hidden" value="${vpn.link}">
-                            <button onclick="copyLink(this)" class="btn-copy">Copy Link</button>
-                        </div>
-                        <hr class="divider">
-                        <div class="card-footer">
-                            <span><i class="far fa-clock"></i> ${vpn.time}</span>
-                            <span class="ping"><i class="fas fa-satellite-dish"></i> ${vpn.ping}</span>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += card;
-            });
-        }
-
-        function copyLink(btn) {
-            const link = btn.previousElementSibling.value;
-            navigator.clipboard.writeText(link).then(() => {
-                const oldText = btn.innerText;
-                btn.innerText = "Copied!";
-                btn.style.backgroundColor = "#2ea44f";
-                setTimeout(() => {
-                    btn.innerText = oldText;
-                    btn.style.backgroundColor = "#1a73e8";
-                }, 2000);
-            });
-        }
-    </script>
-</body>
-</html>
+            { name: "AIS Netmod vpn ", flag: "de", link: "vmess://eyJhZGQiOiIxMDQuMjIuMTgzLjEzMiIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiZnJhbmtmdXJ0MDEuemdqb2suY29tIiwiaWQiOiJiNzE1NzliMS02NTkzLTQyNmQtOTBhYy1mMDAyZmE5NmFkZTEiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInBzIjoiZnJhbmtmdXJ0MDEuemdqb2suY29tIiwic2N5IjoiYXV0byIsInNuaSI6ImZyYW5rZnVydDAxLnpnam9rLmNvbSIsInRscyI6InRsc
+        
