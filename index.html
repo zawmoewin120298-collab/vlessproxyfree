@@ -3,35 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store Vless</title>
+    <title>Store Vless - Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <span class="brand-name">th-mm Vless🇲🇲🇹🇭</span>
-            <marquee> အမြဲးတမ်းအပ်ဒိပ်လုပ်ပေးနေတဲ့ဆိုက်</marquee>
-        </div>
-    </nav>
+    <div class="main-wrapper">
+        <nav class="navbar">
+            <div class="nav-container">
+                <span class="brand-name"><i class="fas fa-bars-staggered"></i> th-mm Vless🇲🇲🇹🇭</span>
+                <marquee>အမြဲတမ်း အပ်ဒိတ်လုပ်ပေးနေတဲ့ဆိုက် - မြန်မာပြည်သားများအတွက် အခမဲ့</marquee>
+            </div>
+        </nav>
 
-    <div class="vpn-container" id="vpn-list">
-        </div>
+        <div class="vpn-container" id="vpn-list">
+            </div>
+    </div>
 
     <script>
-        // ဒီနေရာမှာ မိမိရဲ့ Link အစစ်တွေကို ပြောင်းထည့်ရုံပါပဲ
         const vpnData = [
-            { name: "V2Ray Vless Singapore ", flag: "sg", link: "vmess://eyJhZGQiOiIxMDQuMjIuMTg0LjE0NyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsImlkIjoiMWYyZGFmNDMtZmY5MC00ZGY5LTkyNzYtZGZiODQ4NmQ3MmJjIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwcyI6Im4xNzYxMjE0OTE1Lm12N3doLnRlY2giLCJzY3kiOiJhdXRvIiwic25pIjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsInRscyI6InRscyIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9", ping: "8ms", time: "43s ago" },
-            { name: "AIS Netmod vpn ", flag: "ca", link: "nm-vless://iEWzMOShztN91nkgswdr2zNm35KVGsnJRnYd7OZMmdJqfJZGTVfaM3106Xwi7I5zx5pIQH8yR8JRP0bAaQTPGebFlOoVZfNdJzsgBY4Po5+UITzPj/qHGj9+hklBD8aeOclwCe23IhxAhJCePEBMuNgvG3lnKObYrHtnI0mDH5Gemz1bEKY1E4RJDRzV6Vi4JbBtdDBrQm7hGluHDesPjNzHwdMD/oQct8V9CNt6ouFLd9A1K/OpjRs9M8TdP/hHYOp/k1spygQATE/f03QMbkfGgXqU+muQYq0F+/0Dl3iN29Dax0g4ksPlQ34sXpRsHei0nz/vi6kzB06Uh60dWk0sNeWWTbtEs0MBH3Fuxe0Pc3FQ0S5ytCoIZCSmFlVG3J1StaQPog0Vl6anfKvG27wq181eN7l+y1Xg5qzBPOPMA8AISKCvO3Y3WEJsGgi5XjH+5zupOMhRfsE9EE9ZRA==", ping: "20ms", time: "1m ago" },
-            { name: "AIS Netmod vpn ", flag: "de", link: "vmess://eyJhZGQiOiIxMDQuMjIuMTgzLjEzMiIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiZnJhbmtmdXJ0MDEuemdqb2suY29tIiwiaWQiOiJiNzE1NzliMS02NTkzLTQyNmQtOTBhYy1mMDAyZmE5NmFkZTEiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInBzIjoiZnJhbmtmdXJ0MDEuemdqb2suY29tIiwic2N5IjoiYXV0byIsInNuaSI6ImZyYW5rZnVydDAxLnpnam9rLmNvbSIsInRscyI6InRscyIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9", ping: "156ms", time: "1m ago" },
-            { name: "v2ray VPN Thailand ", flag: "th", link: "vmess://eyJhZGQiOiIxNS4yMzUuNDEuMjAwIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiJ3d3cuc3BlZWR0ZXN0Lm5ldCIsImlkIjoiNThmZTE1NDItNTI5MC00MGFkLTgxNWEtNzc3MDdhODFhZmU1IiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiL0lPZWJoTE1obDFDVGJGSGJMOTVteWZSWDIiLCJwb3J0IjoiODAiLCJwcyI6ImFsbG93ZWQgc2ltY2FyZCIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "85ms", time: "1m ago" },
-            { name: "V2Ray Vless Singapore ", flag: "us", link: "vless://d0298536-d670-4045-bbb1-ddd5ea68683e@104.22.209.207:443?path=%2Ftelegram-%40v2ray_alpha&security=tls&encryption=none&insecure=0&host=a.azadnet003.ddns-ip.net&fp=chrome&type=ws&allowInsecure=0&sni=a.azadnet003.ddns-ip.net#a.azadnet003.ddns-ip.net", ping: "16ms", time: "2m ago" },
-            { name: "true AIS  pubg USA ", flag: "sg", link: "vless://e79f1f25-51ee-4916-b705-8f82c30cf8fc@mm.bigccoth.indevs.in:443?path=%2FMM&security=tls&encryption=none&insecure=0&host=mm.bigccoth.indevs.in&type=ws&allowInsecure=0&sni=mm.bigccoth.indevs.in#mm.bigccoth.indevs.in", ping: "210ms", time: "3m ago" },
-            { name: "V2Ray Vless Japan ", flag: "jp", link: "vless://e4824193-4f54-453b-d037-88368e85ef0e@all.tellmethetrue.shop:443?mode=gun&security=tls&alpn=h2&encryption=none&insecure=0&type=grpc&allowInsecure=0&sni=pqh30v5.carwashipdir.shop#all.tellmethetrue.shop", ping: "45ms", time: "4m ago" },
-            { name: "Outline VPN UK ", flag: "gb", link: "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpmOGY3YUN6Y1BLYnNGOHAz@119.59.98.58:990#th", ping: "180ms", time: "5m ago" },
-            { name: "V2Ray Vless Hong Kong ", flag: "hk", link: "vmess://eyJhZGQiOiIxMDQuMjIuMjA3LjEzMyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoibjE3NTM1OTg0NDguNzRxeHYudG9wIiwiaWQiOiIzY2Q2Zjg0OS0wNzhlLTRkYTktODA4MC1hMjc5MWI1MWI3NjYiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ3cyIsInBhdGgiOiIvIiwicG9ydCI6IjQ0MyIsInBzIjoi8J+Hr/Cfh7VqcCIsInNjeSI6ImF1dG8iLCJzbmkiOiJuMTc1MzU5ODQ0OC43NHF4di50b3AiLCJ0bHMiOiJ0bHMiLCJ0eXBlIjoiLS0tIiwidiI6IjIifQ==", ping: "25ms", time: "6m ago" },
-            { name: "V2Ray Vless France ", flag: "fr", link: "vless://86c50e3a-5b87-49dd-bd20-03c7f2735e40@railway.com:443?path=%2F%3Fed%3D2560&security=tls&encryption=none&insecure=1&host=speedtest.3bb.co.th.speedtestnet.ggff.net&fp=chrome&type=ws&allowInsecure=1&sni=speedtest.3bb.co.th.speedtestnet.ggff.net#AIS", ping: "140ms", time: "7m ago" }
+            { name: "V2Ray Vless Singapore", flag: "sg", link: "vmess://eyJhZGQiOiIxMDQuMjIuMTg0LjE0NyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsImlkIjoiMWYyZGFmNDMtZmY5MC00ZGY5LTkyNzYtZGZiODQ4NmQ3MmJjIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwcyI6Im4xNzYxMjE0OTE1Lm12N3doLnRlY2giLCJzY3kiOiJhdXRvIiwic25pIjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsInRscyI6InRscyIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9", ping: "8ms", time: "43s ago" },
+            { name: "AIS Netmod vpn", flag: "th", link: "nm-vless://...", ping: "20ms", time: "1m ago" },
+            { name: "V2Ray Vless Germany", flag: "de", link: "vmess://...", ping: "156ms", time: "1m ago" },
+            { name: "v2ray VPN Thailand", flag: "th", link: "vmess://...", ping: "85ms", time: "1m ago" },
+            { name: "V2Ray Vless Singapore", flag: "sg", link: "vless://...", ping: "16ms", time: "2m ago" }
         ];
 
         const container = document.getElementById('vpn-list');
@@ -40,17 +36,22 @@
             const card = `
                 <div class="vpn-card">
                     <div class="card-header">
-                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
-                        <h2 class="vpn-name">${vpn.name}</h2>
+                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag" alt="flag">
+                        <div class="name-box">
+                            <h2 class="vpn-name">${vpn.name}</h2>
+                            <span class="status-dot"></span> Active
+                        </div>
                     </div>
                     <div class="copy-section">
                         <input type="hidden" value="${vpn.link}">
-                        <button onclick="copyLink(this)" class="btn-copy">Copy Link</button>
+                        <button onclick="copyLink(this)" class="btn-copy">
+                            <i class="fas fa-copy"></i> Copy Link
+                        </button>
                     </div>
                     <hr class="divider">
                     <div class="card-footer">
                         <span><i class="far fa-clock"></i> ${vpn.time}</span>
-                        <span class="ping"><i class="fas fa-satellite-dish"></i> ${vpn.ping}</span>
+                        <span class="ping"><i class="fas fa-bolt"></i> ${vpn.ping}</span>
                     </div>
                 </div>
             `;
@@ -60,19 +61,17 @@
         function copyLink(btn) {
             const link = btn.previousElementSibling.value;
             navigator.clipboard.writeText(link).then(() => {
-                const oldText = btn.innerText;
-                btn.innerText = "Copied!";
-                btn.style.backgroundColor = "#2ea44f";
+                const oldHTML = btn.innerHTML;
+                btn.innerHTML = "<i class='fas fa-check'></i> Copied!";
+                btn.style.borderColor = "#4ade80";
+                btn.style.color = "#4ade80";
                 setTimeout(() => {
-                    btn.innerText = oldText;
-                    btn.style.backgroundColor = "#1a73e8";
+                    btn.innerHTML = oldHTML;
+                    btn.style.borderColor = "#4dcad9";
+                    btn.style.color = "#4dcad9";
                 }, 2000);
             });
         }
     </script>
 </body>
 </html>
-
-
-
-
