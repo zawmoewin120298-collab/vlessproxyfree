@@ -3,66 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Subscription & VPN List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: #0d1117; color: #ffffff; padding: 15px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 450px; }
+
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .logo { color: #4dcad9; font-weight: bold; font-size: 1.3rem; }
+        .header-icons i { background: #21262d; padding: 8px; border-radius: 8px; margin-left: 8px; }
+
+        /* Dashboard Info Cards */
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .card { background: #161b22; padding: 15px; border-radius: 12px; border: 1px solid #30363d; }
+        .blue { border-left: 4px solid #3182ce; }
+        .green { border-left: 4px solid #38a169; }
+        .red { border-left: 4px solid #e53e3e; }
+        .orange { border-left: 4px solid #dd6b20; }
+        .label { color: #8b949e; font-size: 0.75rem; margin-bottom: 5px; }
+        .value { font-weight: bold; font-size: 0.9rem; }
+        .status-active { color: #4ade80; }
+
+        /* VPN List Cards */
+        .vpn-section-title { margin: 20px 0 10px; color: #4dcad9; font-size: 1.1rem; }
+        .vpn-card { background: #161b22; border-radius: 15px; padding: 15px; border: 1px solid #30363d; margin-bottom: 12px; }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .flag { width: 35px; height: 23px; border-radius: 3px; object-fit: cover; }
+        .vpn-name { font-size: 0.95rem; font-weight: 600; }
+        
+        .btn-copy { 
+            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #4dcad9;
+            background: rgba(77, 202, 217, 0.1); color: #4dcad9; font-weight: bold; cursor: pointer;
+        }
+        .card-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #8b949e; margin-top: 10px; padding-top: 10px; border-top: 1px solid #30363d; }
+        .ping { color: #4ade80; }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <header class="header">
         <div class="logo"><i class="fas fa-bars-staggered"></i> Subscription</div>
-        <div class="header-icons">
-            <i class="fas fa-link"></i>
-            <i class="far fa-comment-dots"></i>
-        </div>
+        <div class="header-icons"><i class="fas fa-link"></i> <i class="far fa-comment-dots"></i></div>
     </header>
 
     <div class="info-grid">
-        <div class="card blue-border">
-            <div class="label"><i class="fas fa-user"></i> Username</div>
-            <div class="value">pt1</div>
-        </div>
-        <div class="card green-border">
-            <div class="label"><i class="fas fa-check-circle"></i> Status</div>
-            <div class="value status-active">Active</div>
-        </div>
-        <div class="card red-border">
-            <div class="label"><i class="far fa-calendar-alt"></i> Expires</div>
-            <div class="value">Indefinitely</div>
-        </div>
-        <div class="card orange-border">
-            <div class="label"><i class="fas fa-arrows-up-down"></i> Bandwidth</div>
-            <div class="value">73.18 GiB / 1.95 TiB</div>
-        </div>
+        <div class="card blue"><div class="label"><i class="fas fa-user"></i> Username</div><div class="value">pt1</div></div>
+        <div class="card green"><div class="label"><i class="fas fa-check-circle"></i> Status</div><div class="value status-active">Active</div></div>
+        <div class="card red"><div class="label"><i class="far fa-calendar-alt"></i> Expires</div><div class="value">Indefinitely</div></div>
+        <div class="card orange"><div class="label"><i class="fas fa-signal"></i> Bandwidth</div><div class="value">73.18 GiB / 1.95 TiB</div></div>
     </div>
 
-    <div class="section-box">
-        <div class="section-header">
-            <h3>Installation</h3>
-            <div class="os-tag"><i class="fab fa-android"></i> Android</div>
-        </div>
-
-        <div class="app-selector">
-            <div class="app-item active">Happ</div>
-            <div class="app-item">FlClashX</div>
-            <div class="app-item">Clash Meta</div>
-            <div class="app-item">v2rayNG</div>
-        </div>
-
-        <div class="action-card">
-            <div class="action-info">
-                <div class="icon-bg"><i class="fas fa-download"></i></div>
-                <div>
-                    <h4>App Installation</h4>
-                    <p>Open in Google Play or download APK directly.</p>
-                </div>
-            </div>
-            <button class="btn btn-outline">Open in Google Play</button>
-            <button class="btn btn-outline">Download APK</button>
-        </div>
-    </div>
+    <h3 class="vpn-section-title">Available VPN Nodes</h3>
+    
+    <div id="vpn-list"></div>
 </div>
 
-</body>
-</html>
+<script>
+    // VPN Data များ (ဒီမှာ Link တွေ ထည့်ပါ)
+    const vpnData = [
+        { name: "V2Ray Vless Singapore", flag: "sg", link: "vmess://...", ping: "8ms", time: "43s ago" },
+        { name: "AIS Netmod vpn", flag: "th", link: "vless://...", ping: "20ms", time: "1m ago" },
+        { name: "USA Premium Server", flag: "us", link: "ss://...", ping: "150ms", time: "5m ago" }
+    ];
+
+    const container = document.getElementById('vpn-list');
+
+    vpnData.forEach(vpn => {
+        container.innerHTML += `
+            <div class="vpn-card">
+                <div class="card-header">
+                    <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
+                    <h2 class="vpn-name">${vpn.name}</h2>
+                </div>
+                <input type="hidden" value="${vpn.link}">
+                <button onclick="copyLink(this)" class="btn-copy">Copy Link</button>
+                <div class="card-footer">
+                    <span><i class="far fa-clock"></i> ${vpn.time}</span>
+                    <span class="ping"><i class="fas fa-bolt">
+    
