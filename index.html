@@ -17,61 +17,53 @@
             </div>
         </nav>
 
+        <div class="info-grid">
+            <div class="info-card blue">
+                <div class="info-label"><i class="fas fa-user"></i> Username</div>
+                <div class="info-value">pt1</div>
+            </div>
+            <div class="info-card green">
+                <div class="info-label"><i class="fas fa-check-circle"></i> Status</div>
+                <div class="info-value active-text">Active</div>
+            </div>
+            <div class="info-card red">
+                <div class="info-label"><i class="far fa-calendar-alt"></i> Expires</div>
+                <div class="info-value">Indefinitely</div>
+            </div>
+            <div class="info-card orange">
+                <div class="info-label"><i class="fas fa-signal"></i> Bandwidth</div>
+                <div class="info-value">73.18 GiB / 1.95 TiB</div>
+            </div>
+        </div>
+
         <div class="vpn-container" id="vpn-list">
             </div>
     </div>
 
     <script>
+        // ... (သင်၏ မူလ JavaScript Code အတိုင်း ပြန်ထည့်ပါ) ...
         const vpnData = [
-            { name: "V2Ray Vless Singapore", flag: "sg", link: "vmess://eyJhZGQiOiIxMDQuMjIuMTg0LjE0NyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsImlkIjoiMWYyZGFmNDMtZmY5MC00ZGY5LTkyNzYtZGZiODQ4NmQ3MmJjIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwcyI6Im4xNzYxMjE0OTE1Lm12N3doLnRlY2giLCJzY3kiOiJhdXRvIiwic25pIjoibjE3NjEyMTQ5MTUubXY3d2gudGVjaCIsInRscyI6InRscyIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9", ping: "8ms", time: "43s ago" },
-            { name: "AIS Netmod vpn", flag: "th", link: "nm-vless://...", ping: "20ms", time: "1m ago" },
-            { name: "V2Ray Vless Germany", flag: "de", link: "vmess://...", ping: "156ms", time: "1m ago" },
-            { name: "v2ray VPN Thailand", flag: "th", link: "vmess://...", ping: "85ms", time: "1m ago" },
-            { name: "V2Ray Vless Singapore", flag: "sg", link: "vless://...", ping: "16ms", time: "2m ago" }
+            { name: "V2Ray Vless Singapore", flag: "sg", link: "vmess://...", ping: "8ms", time: "43s ago" },
+            { name: "AIS Netmod vpn", flag: "th", link: "nm-vless://...", ping: "20ms", time: "1m ago" }
         ];
 
         const container = document.getElementById('vpn-list');
-
         vpnData.forEach(vpn => {
             const card = `
                 <div class="vpn-card">
                     <div class="card-header">
-                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag" alt="flag">
+                        <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
                         <div class="name-box">
                             <h2 class="vpn-name">${vpn.name}</h2>
-                            <span class="status-dot"></span> Active
                         </div>
                     </div>
                     <div class="copy-section">
                         <input type="hidden" value="${vpn.link}">
-                        <button onclick="copyLink(this)" class="btn-copy">
-                            <i class="fas fa-copy"></i> Copy Link
-                        </button>
+                        <button onclick="copyLink(this)" class="btn-copy"><i class="fas fa-copy"></i> Copy Link</button>
                     </div>
-                    <hr class="divider">
                     <div class="card-footer">
                         <span><i class="far fa-clock"></i> ${vpn.time}</span>
                         <span class="ping"><i class="fas fa-bolt"></i> ${vpn.ping}</span>
                     </div>
-                </div>
-            `;
+                </div>`;
             container.innerHTML += card;
-        });
-
-        function copyLink(btn) {
-            const link = btn.previousElementSibling.value;
-            navigator.clipboard.writeText(link).then(() => {
-                const oldHTML = btn.innerHTML;
-                btn.innerHTML = "<i class='fas fa-check'></i> Copied!";
-                btn.style.borderColor = "#4ade80";
-                btn.style.color = "#4ade80";
-                setTimeout(() => {
-                    btn.innerHTML = oldHTML;
-                    btn.style.borderColor = "#4dcad9";
-                    btn.style.color = "#4dcad9";
-                }, 2000);
-            });
-        }
-    </script>
-</body>
-</html>
