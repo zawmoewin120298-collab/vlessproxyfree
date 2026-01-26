@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription & VPN List</title>
+    <title>VPN Dashboard & Nodes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -14,9 +14,9 @@
         /* Header */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .logo { color: #4dcad9; font-weight: bold; font-size: 1.3rem; }
-        .header-icons i { background: #21262d; padding: 8px; border-radius: 8px; margin-left: 8px; }
+        .header-icons i { background: #21262d; padding: 8px; border-radius: 8px; margin-left: 8px; cursor: pointer; }
 
-        /* Dashboard Info Cards */
+        /* Dashboard Cards */
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
         .card { background: #161b22; padding: 15px; border-radius: 12px; border: 1px solid #30363d; }
         .blue { border-left: 4px solid #3182ce; }
@@ -27,19 +27,22 @@
         .value { font-weight: bold; font-size: 0.9rem; }
         .status-active { color: #4ade80; }
 
-        /* VPN List Cards */
-        .vpn-section-title { margin: 20px 0 10px; color: #4dcad9; font-size: 1.1rem; }
-        .vpn-card { background: #161b22; border-radius: 15px; padding: 15px; border: 1px solid #30363d; margin-bottom: 12px; }
-        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .flag { width: 35px; height: 23px; border-radius: 3px; object-fit: cover; }
-        .vpn-name { font-size: 0.95rem; font-weight: 600; }
+        /* VPN Nodes Section */
+        .vpn-section-title { margin: 20px 0 15px; color: #4dcad9; font-size: 1.1rem; border-left: 3px solid #4dcad9; padding-left: 10px; }
+        .vpn-card { background: #161b22; border-radius: 15px; padding: 18px; border: 1px solid #30363d; margin-bottom: 15px; }
+        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .flag { width: 40px; height: 26px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .vpn-name { font-size: 1rem; font-weight: 600; color: #e6edf3; }
         
         .btn-copy { 
-            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #4dcad9;
-            background: rgba(77, 202, 217, 0.1); color: #4dcad9; font-weight: bold; cursor: pointer;
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #4dcad9;
+            background: rgba(77, 202, 217, 0.05); color: #4dcad9; font-weight: bold; cursor: pointer;
+            transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .card-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #8b949e; margin-top: 10px; padding-top: 10px; border-top: 1px solid #30363d; }
-        .ping { color: #4ade80; }
+        .btn-copy:active { transform: scale(0.98); background: rgba(77, 202, 217, 0.2); }
+
+        .card-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #8b949e; margin-top: 15px; padding-top: 12px; border-top: 1px solid #30363d; }
+        .ping { color: #4ade80; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -63,11 +66,13 @@
 </div>
 
 <script>
-    // VPN Data များ (ဒီမှာ Link တွေ ထည့်ပါ)
+    // Singapore Vless Node ၅ ခု
     const vpnData = [
-        { name: "V2Ray Vless Singapore", flag: "sg", link: "vmess://...", ping: "8ms", time: "43s ago" },
-        { name: "AIS Netmod vpn", flag: "th", link: "vless://...", ping: "20ms", time: "1m ago" },
-        { name: "USA Premium Server", flag: "us", link: "ss://...", ping: "150ms", time: "5m ago" }
+        { name: "SG-Vless-Premium-01", flag: "sg", link: "vless://your-link-1-here", ping: "25ms", time: "Just now" },
+        { name: "SG-Vless-Premium-02", flag: "sg", link: "vless://your-link-2-here", ping: "32ms", time: "1m ago" },
+        { name: "SG-Vless-Gaming-03", flag: "sg", link: "vless://your-link-3-here", ping: "18ms", time: "2m ago" },
+        { name: "SG-Vless-VIP-04", flag: "sg", link: "vless://your-link-4-here", ping: "28ms", time: "4m ago" },
+        { name: "SG-Vless-Streaming-05", flag: "sg", link: "vless://your-link-5-here", ping: "30ms", time: "5m ago" }
     ];
 
     const container = document.getElementById('vpn-list');
@@ -80,8 +85,30 @@
                     <h2 class="vpn-name">${vpn.name}</h2>
                 </div>
                 <input type="hidden" value="${vpn.link}">
-                <button onclick="copyLink(this)" class="btn-copy">Copy Link</button>
+                <button onclick="copyLink(this)" class="btn-copy"><i class="fas fa-copy"></i> Copy vless config</button>
                 <div class="card-footer">
                     <span><i class="far fa-clock"></i> ${vpn.time}</span>
-                    <span class="ping"><i class="fas fa-bolt">
-    
+                    <span class="ping"><i class="fas fa-bolt"></i> ${vpn.ping}</span>
+                </div>
+            </div>
+        `;
+    });
+
+    function copyLink(btn) {
+        const link = btn.previousElementSibling.value;
+        navigator.clipboard.writeText(link).then(() => {
+            const oldText = btn.innerHTML;
+            btn.innerHTML = "<i class='fas fa-check'></i> Copied!";
+            btn.style.color = "#4ade80";
+            btn.style.borderColor = "#4ade80";
+            setTimeout(() => { 
+                btn.innerHTML = oldText; 
+                btn.style.color = "#4dcad9";
+                btn.style.borderColor = "#4dcad9";
+            }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
