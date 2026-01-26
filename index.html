@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VPN Dashboard & Nodes</title>
+    <title>VPN Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
         body { background-color: #0d1117; color: #ffffff; padding: 15px; display: flex; justify-content: center; }
         .container { width: 100%; max-width: 450px; }
-
-        /* Header */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .logo { color: #4dcad9; font-weight: bold; font-size: 1.3rem; }
-        .header-icons i { background: #21262d; padding: 8px; border-radius: 8px; margin-left: 8px; cursor: pointer; }
-
-        /* Dashboard Cards */
+        .header-icons i { background: #21262d; padding: 8px; border-radius: 8px; margin-left: 8px; }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
         .card { background: #161b22; padding: 15px; border-radius: 12px; border: 1px solid #30363d; }
         .blue { border-left: 4px solid #3182ce; }
@@ -26,57 +21,42 @@
         .label { color: #8b949e; font-size: 0.75rem; margin-bottom: 5px; }
         .value { font-weight: bold; font-size: 0.9rem; }
         .status-active { color: #4ade80; }
-
-        /* VPN Nodes Section */
         .vpn-section-title { margin: 20px 0 15px; color: #4dcad9; font-size: 1.1rem; border-left: 3px solid #4dcad9; padding-left: 10px; }
         .vpn-card { background: #161b22; border-radius: 15px; padding: 18px; border: 1px solid #30363d; margin-bottom: 15px; }
         .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-        .flag { width: 40px; height: 26px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .flag { width: 40px; height: 26px; border-radius: 4px; object-fit: cover; }
         .vpn-name { font-size: 1rem; font-weight: 600; color: #e6edf3; }
-        
-        .btn-copy { 
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #4dcad9;
-            background: rgba(77, 202, 217, 0.05); color: #4dcad9; font-weight: bold; cursor: pointer;
-            transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-copy:active { transform: scale(0.98); background: rgba(77, 202, 217, 0.2); }
-
+        .btn-copy { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #4dcad9; background: rgba(77, 202, 217, 0.05); color: #4dcad9; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .card-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #8b949e; margin-top: 15px; padding-top: 12px; border-top: 1px solid #30363d; }
         .ping { color: #4ade80; font-weight: bold; }
     </style>
 </head>
 <body>
-
 <div class="container">
     <header class="header">
         <div class="logo"><i class="fas fa-bars-staggered"></i> Subscription</div>
         <div class="header-icons"><i class="fas fa-link"></i> <i class="far fa-comment-dots"></i></div>
     </header>
-
     <div class="info-grid">
-        <div class="card blue"><div class="label"><i class="fas fa-user"></i> Username</div><div class="value">pt1</div></div>
-        <div class="card green"><div class="label"><i class="fas fa-check-circle"></i> Status</div><div class="value status-active">Active</div></div>
-        <div class="card red"><div class="label"><i class="far fa-calendar-alt"></i> Expires</div><div class="value">Indefinitely</div></div>
-        <div class="card orange"><div class="label"><i class="fas fa-signal"></i> Bandwidth</div><div class="value">73.18 GiB / 1.95 TiB</div></div>
+        <div class="card blue"><div class="label">Username</div><div class="value">pt1</div></div>
+        <div class="card green"><div class="label">Status</div><div class="value status-active">Active</div></div>
+        <div class="card red"><div class="label">Expires</div><div class="value">Indefinitely</div></div>
+        <div class="card orange"><div class="label">Bandwidth</div><div class="value">73.18 GiB / 1.95 TiB</div></div>
     </div>
-
     <h3 class="vpn-section-title">Available VPN Nodes</h3>
-    
     <div id="vpn-list"></div>
 </div>
 
 <script>
-    // Singapore Vless Node ၅ ခု
     const vpnData = [
-        { name: "SG-Vless-Premium-01", flag: "us", link: "vless://your-link-1-here", ping: "25ms", time: "Just now" },
-        { name: "SG-Vless-Premium-02", flag: "sg", link: "vless://your-link-2-here", ping: "32ms", time: "1m ago" },
-        { name: "SG-Vless-Gaming-03", flag: "sg", link: "vless://your-link-3-here", ping: "18ms", time: "2m ago" },
-        { name: "SG-Vless-VIP-04", flag: "sg", link: "vless://your-link-4-here", ping: "28ms", time: "4m ago" },
-        { name: "SG-Vless-Streaming-05", flag: "sg", link: "vless://your-link-5-here", ping: "30ms", time: "5m ago" }
+        { name: "MM-Vless-Myanmar 🇲🇲", flag: "mm", link: "vless://link-mm", ping: "45ms", time: "Just now" },
+        { name: "TH-Vless-Thailand 🇹🇭", flag: "th", link: "vless://link-th", ping: "22ms", time: "1m ago" },
+        { name: "US-Vless-USA 🇺🇸", flag: "us", link: "vless://link-us", ping: "180ms", time: "2m ago" },
+        { name: "SG-Vless-Singapore 🇸🇬", flag: "sg", link: "vless://link-sg1", ping: "15ms", time: "3m ago" },
+        { name: "SG-Vless-Premium 🇸🇬", flag: "sg", link: "vless://link-sg2", ping: "12ms", time: "5m ago" }
     ];
 
     const container = document.getElementById('vpn-list');
-
     vpnData.forEach(vpn => {
         container.innerHTML += `
             <div class="vpn-card">
@@ -90,8 +70,7 @@
                     <span><i class="far fa-clock"></i> ${vpn.time}</span>
                     <span class="ping"><i class="fas fa-bolt"></i> ${vpn.ping}</span>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
 
     function copyLink(btn) {
@@ -99,16 +78,10 @@
         navigator.clipboard.writeText(link).then(() => {
             const oldText = btn.innerHTML;
             btn.innerHTML = "<i class='fas fa-check'></i> Copied!";
-            btn.style.color = "#4ade80";
-            btn.style.borderColor = "#4ade80";
-            setTimeout(() => { 
-                btn.innerHTML = oldText; 
-                btn.style.color = "#4dcad9";
-                btn.style.borderColor = "#4dcad9";
-            }, 2000);
+            setTimeout(() => { btn.innerHTML = oldText; }, 2000);
         });
     }
 </script>
-
 </body>
 </html>
+
