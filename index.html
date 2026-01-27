@@ -3,102 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VPN Dashboard - Copy Tracker</title>
+    <title>VIP Proxy Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* အရင်က Design အဟောင်းများကို ဒီနေရာမှာ ထည့်ထားပါသည် */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background-color: #0d1117; color: #ffffff; padding: 15px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 450px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .logo { color: #4dcad9; font-weight: bold; font-size: 1.3rem; }
-        .header-icons { display: flex; align-items: center; }
-        .header-icons i, .admin-btn { background: #21262d; padding: 8px; border-radius: 8px; margin-left: 8px; cursor: pointer; color: #ffffff; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; }
-        .admin-btn { color: #4dcad9; border: 1px solid #30363d; font-weight: bold; }
-
-        /* Dashboard Info Cards */
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        .card { background: #161b22; padding: 15px; border-radius: 12px; border: 1px solid #30363d; }
-        .blue { border-left: 4px solid #3182ce; }
-        .green { border-left: 4px solid #38a169; }
-        .red { border-left: 4px solid #e53e3e; }
-        .orange { border-left: 4px solid #dd6b20; }
-        .label { color: #8b949e; font-size: 0.75rem; margin-bottom: 5px; }
-        .value { font-weight: bold; font-size: 0.9rem; }
-        
-        /* Copy Count အတွက် စာသားအသေးလေး */
-        .copy-count-text { font-size: 0.7rem; color: #4dcad9; margin-top: 4px; display: block; }
-        
-        .status-active { color: #4ade80; }
-        .vpn-section-title { margin: 20px 0 15px; color: #4dcad9; font-size: 1.1rem; border-left: 3px solid #4dcad9; padding-left: 10px; }
-        .vpn-card { background: #161b22; border-radius: 15px; padding: 18px; border: 1px solid #30363d; margin-bottom: 15px; }
-        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-        .flag { width: 40px; height: 26px; border-radius: 4px; object-fit: cover; }
-        .vpn-name { font-size: 1rem; font-weight: 600; color: #e6edf3; }
-        .btn-copy { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #4dcad9; background: rgba(77, 202, 217, 0.05); color: #4dcad9; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .card-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #8b949e; margin-top: 15px; padding-top: 12px; border-top: 1px solid #30363d; }
+        body { background-color: #0d1117; color: #ffffff; padding: 15px; }
+        .container { max-width: 450px; margin: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #30363d; }
+        .admin-btn { background: #21262d; padding: 10px 15px; border-radius: 8px; color: #4dcad9; text-decoration: none; font-weight: bold; border: 1px solid #30363d; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+        .vpn-card { background: #161b22; border-radius: 12px; padding: 15px; border: 1px solid #30363d; margin-bottom: 15px; }
+        .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .flag { width: 30px; height: 20px; border-radius: 3px; object-fit: cover; }
+        .btn-copy { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #4dcad9; background: rgba(77, 202, 217, 0.05); color: #4dcad9; font-weight: bold; cursor: pointer; }
+        .card-footer { display: flex; justify-content: space-between; font-size: 0.75rem; color: #8b949e; margin-top: 12px; }
         .ping { color: #4ade80; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header class="header">
-        <div class="logo"><i class="fas fa-bars-staggered"></i> vip</div>
-        <div class="header-icons">
-            <a href="#" class="admin-btn"><i class="fas fa-user-shield"></i> Admin</a>
-            <i class="fas fa-link"></i>
-            <i class="far fa-comment-dots"></i>
-        </div>
-    </header>
-
-    <div class="info-grid">
-        <div class="card blue">
-            <div class="label"><i class="fas fa-user"></i> Username</div>
-            <div class="value">pt1</div>
-            <span class="copy-count-text">Total Copies: <span id="total-copy-count">0</span></span>
-        </div>
-        <div class="card green">
-            <div class="label"><i class="fas fa-check-circle"></i> Status</div>
-            <div class="value status-active">Active</div>
-        </div>
-        <div class="card red">
-            <div class="label"><i class="far fa-calendar-alt"></i> Expires</div>
-            <div class="value">Indefinitely</div>
-        </div>
-        <div class="card orange">
-            <div class="label"><i class="fas fa-signal"></i> Bandwidth</div>
-            <div class="value">73.18 GiB / 1.95 TiB</div>
-        </div>
+    <div class="header">
+        <div style="color: #4dcad9; font-weight: bold;">VIP Proxy Dashboard</div>
+        <a href="https://m.me/vpnconfigvip" target="_blank" class="admin-btn">
+            <i class="fab fa-facebook-messenger"></i> Admin ဆက်သွယ်ရန်
+        </a>
     </div>
 
-    <h3 class="vpn-section-title">Available VPN Nodes</h3>
+    <marquee style="background: rgba(77, 202, 217, 0.1); padding: 8px; border-radius: 5px; margin-bottom: 20px; font-size: 0.8rem;">
+        <a href="https://m.me/vpnconfigvip" style="color: #4dcad9; text-decoration: none;">📩 VIP Password ဝယ်ယူရန် Admin ကို ဆက်သွယ်ပါ...</a>
+    </marquee>
+
     <div id="vpn-list"></div>
 </div>
 
 <script>
-    // Copy Count ကို Local Storage ကနေ ဖတ်ယူခြင်း
-    let copyCount = localStorage.getItem('vpnCopyCount') || 0;
-    document.getElementById('total-copy-count').innerText = copyCount;
+    const VIP_PASSWORD = "1234"; 
 
     const vpnData = [
-        { name: "MM-Vless-Myanmar 🇲🇲", flag: "mm", link: "vless://link-mm", ping: "45ms", time: "Just now" },
-        { name: "AIS TH-Vless-Thailand 🇹🇭", flag: "th", link: "nm-vless://9FvLDZZuClMY3MbM+OOYxCNmtrd8HfEc6q9rANJuqmrk4/8adUQLkERUZIvMgfnyfHXa2/WgpWjZt1LWmpawwhk5k1e2f7dta6KBksdPY/57ovxwJ8SSn1HW83V2+LlOttJSuA/w2lhAwAZF7cTjoFWYi5kVOfRIkbMM+9arjmBY0v2WZiw4+E3L1Z1HhvGkE0v0wJjHXpfZRzRaf1nHu2bzWZ/9IU27GbxbuRlsHRoiMBDZ0vh8FBXGKlpD1czcgD0lX2scU/6hWn2jrhn4VxNKijR1gG9IrWpPQFmhzvOVkiCCktb3SVV5TV6p5/Q6Fp/55ZZUmKsYspypHAJ7puxvZIu7TDtGHLN98XZuRmdcjzocSuxWtjhnklMaTvFJLn6Lol8lc3j058Cv0pLFAHIhiE9OpxwuY+0V5d+XZFoj82vrMFz74oC2iBjaAxCa", ping: "22ms", time: "1m ago" },
-        { name: "US-Vless-USA 🇺🇸", flag: "us", link: "vless://link-us", ping: "180ms", time: "2m ago" },
-        { name: "SG-Vless-Singapore 🇸🇬", flag: "sg", link: "vless://link-sg1", ping: "15ms", time: "3m ago" },
-        { name: "SG-Vless-Premium 🇸🇬", flag: "sg", link: "vless://link-sg2", ping: "12ms", time: "5m ago" }
+        { name: "SG-AIS_TRUE_gameဖိုင် (VIP Only) 🔒", flag: "sg", link: "nm-vless://skLrvwC8FHcTKyolqNebq+jvsay0eg13fxnEYd+TNlYkNr4BK5h6O71bByYT3mrWj1kFccLs4+oIaDQsfMNz/PtiRUpcxIxX1XfVebj6org5yXAJ7bciHECEkJ48QEy42C8beWco5tise2cjSYMfkXSx/JDz6N16+xVd0zXEDklQvPJMQrP/injHyZQwPNnIGdQMSxjdosBqizE5L4+f5GDqf5NbKcoEAExP39N0DG589veu/ThB8W3x2tlrDzutkQNHdwN6T4GbmSj9UkuUyAEOxLrR2oq/43H2f9rk1b9oRTZhxa5RojnCVxVV5CaO", ping: "54ms", time: "New", isVip: true },
+        { name: "TRUE", flag: "sg", link: "ss://bm9uZTplNzlmMWYyNS01MWVlLTQ5MTYtYjcwNS04ZjgyYzMwY2Y4ZmM=@mm.bigccoth.indevs.in:443#SG-ss", ping: "45ms", time: "Free", isVip: false },
+        { name: "AIS TH-Vless-Thailand 🇹🇭", flag: "th", link: "nm-vless://r5/8Oug2VrdOXku5KVr4qt35bRZXE705xoOmFjIgDXr7ujO9biyZ9/lqeV+PgZOZOYzOIVXBELDpRg5FfFaYVaK1fnU4ly0O7DKsP8wZSzVIiRFLRIws9vvc9H/DGSUwSgbpuBM7FhLxBGifbDjkOUt30DUr86mNGz0zxN0/+Edg6n+TWynKBABMT9/TdAxuLh3i9YUcoX9truPWA0zDr3GLSqX8do/+7JFGCE4VKlO7OYpDZVrbByZ17JLK/nH3YSrtG3f3dgkxAaNxn627ykYuYaONrTaAG6BMjKx36w8p6rGt3ED83WeCLpejV+Vh", ping: "22ms", time: "Free", isVip: false }
     ];
 
     const container = document.getElementById('vpn-list');
-    vpnData.forEach(vpn => {
+
+    // ကုဒ်တွေကို card တစ်ခုချင်းစီ ထုတ်ပေးခြင်း
+    vpnData.forEach((vpn, index) => {
         container.innerHTML += `
             <div class="vpn-card">
                 <div class="card-header">
                     <img src="https://flagcdn.com/w80/${vpn.flag}.png" class="flag">
-                    <h2 class="vpn-name">${vpn.name}</h2>
+                    <h2 style="font-size: 0.95rem;">${vpn.name}</h2>
                 </div>
-                <input type="hidden" value="${vpn.link}">
-                <button onclick="copyLink(this)" class="btn-copy"><i class="fas fa-copy"></i> Copy vless config</button>
+                <button onclick="handleCopy(${index}, this)" class="btn-copy">
+                    <i class="${vpn.isVip ? 'fas fa-lock' : 'fas fa-copy'}"></i> 
+                    ${vpn.isVip ? 'Copy VIP Config' : 'Copy Free Config'}
+                </button>
                 <div class="card-footer">
                     <span><i class="far fa-clock"></i> ${vpn.time}</span>
                     <span class="ping"><i class="fas fa-bolt"></i> ${vpn.ping}</span>
@@ -106,14 +66,22 @@
             </div>`;
     });
 
-    function copyLink(btn) {
-        const link = btn.previousElementSibling.value;
-        navigator.clipboard.writeText(link).then(() => {
-            // Copy နှိပ်လိုက်တိုင်း အရေအတွက် တိုးပေးခြင်း
-            copyCount++;
-            document.getElementById('total-copy-count').innerText = copyCount;
-            localStorage.setItem('vpnCopyCount', copyCount); // Browser မှာ သိမ်းထားခြင်း
+    function handleCopy(index, btn) {
+        const vpn = vpnData[index];
+        if (vpn.isVip) {
+            const userInput = prompt("VIP Password ရိုက်ထည့်ပါ:");
+            if (userInput === VIP_PASSWORD) {
+                executeCopy(vpn.link, btn);
+            } else if (userInput !== null) {
+                alert("❌ Password မှားယွင်းနေပါသည်။");
+            }
+        } else {
+            executeCopy(vpn.link, btn);
+        }
+    }
 
+    function executeCopy(link, btn) {
+        navigator.clipboard.writeText(link).then(() => {
             const oldText = btn.innerHTML;
             btn.innerHTML = "<i class='fas fa-check'></i> Copied!";
             setTimeout(() => { btn.innerHTML = oldText; }, 2000);
