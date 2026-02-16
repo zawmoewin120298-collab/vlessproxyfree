@@ -1,0 +1,11 @@
+cat <<EOF > config.json
+{
+  "inbounds": [{
+    "port": 8080,
+    "protocol": "vless",
+    "settings": { "clients": [{"id": "9343719b-f357-41a4-9e32-9c4c1d7f35b4"}], "decryption": "none" },
+    "streamSettings": { "network": "ws", "wsSettings": { "path": "/proxy" } }
+  }],
+  "outbounds": [{ "protocol": "freedom" }]
+}
+EOF
