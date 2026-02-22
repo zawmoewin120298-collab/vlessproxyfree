@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Proxy Dashboard</title>
+    <title>MM-TH PREMIUM | VIP Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
@@ -11,43 +11,52 @@
         .container { max-width: 450px; margin: auto; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #30363d; }
         .admin-btn { background: #21262d; padding: 10px 15px; border-radius: 8px; color: #4dcad9; text-decoration: none; font-weight: bold; border: 1px solid #30363d; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
-        .vpn-card { background: #161b22; border-radius: 12px; padding: 15px; border: 1px solid #30363d; margin-bottom: 15px; }
+        .vpn-card { background: #161b22; border-radius: 12px; padding: 15px; border: 1px solid #30363d; margin-bottom: 15px; transition: 0.3s; }
+        .vpn-card:hover { border-color: #4dcad9; }
         .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         .flag { width: 30px; height: 20px; border-radius: 3px; object-fit: cover; }
-        .btn-copy { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #4dcad9; background: rgba(77, 202, 217, 0.05); color: #4dcad9; font-weight: bold; cursor: pointer; }
+        .btn-copy { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #4dcad9; background: rgba(77, 202, 217, 0.05); color: #4dcad9; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-copy:active { transform: scale(0.98); }
         .card-footer { display: flex; justify-content: space-between; font-size: 0.75rem; color: #8b949e; margin-top: 12px; }
         .ping { color: #4ade80; font-weight: bold; }
+        .footer-links { text-align: center; margin-top: 30px; font-size: 0.8rem; color: #8b949e; }
+        .footer-links a { color: #4dcad9; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div style="color: #4dcad9; font-weight: bold;">VIP Proxy Dashboard</div>
+        <div style="color: #4dcad9; font-weight: bold; font-size: 1.2rem;">MM-TH PREMIUM</div>
         <a href="https://m.me/vpnconfigvip" target="_blank" class="admin-btn">
-            <i class="fab fa-facebook-messenger"></i> Admin ဆက်သွယ်ရန်
+            <i class="fab fa-facebook-messenger"></i> Admin
         </a>
     </div>
 
-    <marquee style="background: rgba(77, 202, 217, 0.1); padding: 8px; border-radius: 5px; margin-bottom: 20px; font-size: 0.8rem;">
-        <a href="https://m.me/vpnconfigvip" style="color: #4dcad9; text-decoration: none;">📩 VIP Password ဝယ်ယူရန် Admin ကို ဆက်သွယ်ပါ...</a>
+    <marquee style="background: rgba(77, 202, 217, 0.1); padding: 8px; border-radius: 5px; margin-bottom: 20px; font-size: 0.8rem; color: #4dcad9;">
+        📩 VIP Password ဝယ်ယူရန် Admin ကို ဆက်သွယ်ပါ... စိတ်ကြိုက်မြန်နှုန်းဖြင့် အသုံးပြုနိုင်ပါသည်။
     </marquee>
 
     <div id="vpn-list"></div>
+
+    <div class="footer-links">
+        <p>© 2026 MM-TH PREMIUM VPN</p>
+        <a href="privacy.html">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </div>
 </div>
 
 <script>
+    // ဆရာ စိတ်ကြိုက် ပြင်နိုင်သော Password
     const VIP_PASSWORD = "1234"; 
 
     const vpnData = [
-        { name: "SG-AIS_TRUE_gameဖိုင် (VIP Only) 🔒", flag: "sg", link: "nm-vless://skLrvwC8FHcTKyolqNebq+jvsay0eg13fxnEYd+TNlYkNr4BK5h6O71bByYT3mrWj1kFccLs4+oIaDQsfMNz/PtiRUpcxIxX1XfVebj6org5yXAJ7bciHECEkJ48QEy42C8beWco5tise2cjSYMfkXSx/JDz6N16+xVd0zXEDklQvPJMQrP/injHyZQwPNnIGdQMSxjdosBqizE5L4+f5GDqf5NbKcoEAExP39N0DG589veu/ThB8W3x2tlrDzutkQNHdwN6T4GbmSj9UkuUyAEOxLrR2oq/43H2f9rk1b9oRTZhxa5RojnCVxVV5CaO", ping: "54ms", time: "New", isVip: true },
-        { name: "TRUE", flag: "sg", link: "ss://bm9uZTplNzlmMWYyNS01MWVlLTQ5MTYtYjcwNS04ZjgyYzMwY2Y4ZmM=@mm.bigccoth.indevs.in:443#SG-ss", ping: "45ms", time: "Free", isVip: false },
-        { name: "AIS TH-Vless-Thailand 🇹🇭", flag: "th", link: "nm-vless://r5/8Oug2VrdOXku5KVr4qt35bRZXE705xoOmFjIgDXr7ujO9biyZ9/lqeV+PgZOZOYzOIVXBELDpRg5FfFaYVaK1fnU4ly0O7DKsP8wZSzVIiRFLRIws9vvc9H/DGSUwSgbpuBM7FhLxBGifbDjkOUt30DUr86mNGz0zxN0/+Edg6n+TWynKBABMT9/TdAxuLh3i9YUcoX9truPWA0zDr3GLSqX8do/+7JFGCE4VKlO7OYpDZVrbByZ17JLK/nH3YSrtG3f3dgkxAaNxn627ykYuYaONrTaAG6BMjKx36w8p6rGt3ED83WeCLpejV+Vh", ping: "22ms", time: "Free", isVip: false }
+        { name: "SG-AIS_TRUE_VIP 🔒", flag: "sg", link: "vless://your-config-here", ping: "54ms", time: "Premium", isVip: true },
+        { name: "TRUE Free Server", flag: "sg", link: "ss://bm9uZTplNzlmMWYyNS01MWVlLTQ5MTYtYjcwNS04ZjgyYzMwY2Y4ZmM=@mm.bigccoth.indevs.in:443#SG-ss", ping: "45ms", time: "Free", isVip: false },
+        { name: "AIS TH-Vless-Thailand 🇹🇭", flag: "th", link: "vless://your-free-config", ping: "22ms", time: "Free", isVip: false }
     ];
 
     const container = document.getElementById('vpn-list');
 
-    // ကုဒ်တွေကို card တစ်ခုချင်းစီ ထုတ်ပေးခြင်း
     vpnData.forEach((vpn, index) => {
         container.innerHTML += `
             <div class="vpn-card">
@@ -82,12 +91,19 @@
 
     function executeCopy(link, btn) {
         navigator.clipboard.writeText(link).then(() => {
-            const oldText = btn.innerHTML;
+            const oldContent = btn.innerHTML;
             btn.innerHTML = "<i class='fas fa-check'></i> Copied!";
-            setTimeout(() => { btn.innerHTML = oldText; }, 2000);
+            btn.style.borderColor = "#4ade80";
+            btn.style.color = "#4ade80";
+            setTimeout(() => { 
+                btn.innerHTML = oldContent; 
+                btn.style.borderColor = "#4dcad9";
+                btn.style.color = "#4dcad9";
+            }, 2000);
         });
     }
 </script>
 
 </body>
 </html>
+
